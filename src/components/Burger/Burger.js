@@ -4,11 +4,19 @@ import classes from './Burger.css';
 
 const burger = (props) => {
     
+    const transformedAddOns = Object.keys(props.addOns).map((addOnKey) => {
+        return [...Array(props.addOns[addOnKey])].map((_,i) => {
+             return <BurgerAddOns key={addOnKey + i} type={addOnKey}/>
+        })    
+    })
+    
+
+    console.log(transformedAddOns);
+
     return(
         <div className={classes.Burger}>
             <BurgerAddOns type="bread-top"/>
-            <BurgerAddOns type="salad"/>
-            <BurgerAddOns type="meat"/>
+            {transformedAddOns}
             <BurgerAddOns type="bread-bottom"/>
         </div>
         
