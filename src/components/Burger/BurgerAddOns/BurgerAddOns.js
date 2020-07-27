@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './BurgerAddOns.css';
+import PropTypes from 'prop-types';
 
 const burgerAddOns = (props) => {
     let addOn = null;
@@ -32,8 +33,12 @@ const burgerAddOns = (props) => {
         default:
             addOn = null;    
     }
-    return addOn;
-    
+    return addOn;   
 };
+
+burgerAddOns.propTypes = {
+    type: PropTypes.string.isRequired
+}
+
 
 export default burgerAddOns;
