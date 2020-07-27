@@ -6,10 +6,10 @@ class FoodBuilder extends Component{
 
     state = {
         burgerAddOns : {
-            salad: 1,
-            meat: 1,
-            bacon: 1,
-            cheese: 1
+            salad: 0,
+            meat: 0,
+            bacon: 0,
+            cheese: 0
         }
     }
 

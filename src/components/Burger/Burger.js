@@ -4,14 +4,18 @@ import classes from './Burger.css';
 
 const burger = (props) => {
     
-    const transformedAddOns = Object.keys(props.addOns).map((addOnKey) => {
+    let transformedAddOns = Object.keys(props.addOns).map((addOnKey) => {
         return [...Array(props.addOns[addOnKey])].map((_,i) => {
              return <BurgerAddOns key={addOnKey + i} type={addOnKey}/>
         })    
-    })
+    }).reduce((arr, el) => arr.concat(el));
     
 
     console.log(transformedAddOns);
+
+    if(transformedAddOns.length === 0){
+        transformedAddOns = <p>Add your items!!</p>
+    }
 
     return(
         <div className={classes.Burger}>
