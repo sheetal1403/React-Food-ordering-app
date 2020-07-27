@@ -19,15 +19,15 @@ const burgerAddOns = (props) => {
             break;
 
         case ('meat'):
-            addOn = <div className="Meat"></div>;
+            addOn = <div className={classes.Meat}></div>;
             break;
 
         case ('cheese'):
-            addOn = <div className="Cheese"></div>;
+            addOn = <div className={classes.Cheese}></div>;
             break;
                 
         case ('salad'):
-            addOn = <div className="Salad"></div>;
+            addOn = <div className={classes.Salad}></div>;
             break;
         
         default:
