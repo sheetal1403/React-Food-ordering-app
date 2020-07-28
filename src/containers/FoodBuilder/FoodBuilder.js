@@ -56,10 +56,12 @@ class FoodBuilder extends Component{
         return(
             <Aux>
                 <Burger addOns = {this.state.burgerAddOns}></Burger>
+
                 <BuildControls 
                     ingredients={this.state.burgerAddOns} 
                     addIngredient={this.addIngredientHandler}
-                    removeIngredient={this.removeIngredientHandler}></BuildControls>
+                    removeIngredient={this.removeIngredientHandler}
+                    price={this.state.totalPrice}></BuildControls>
             </Aux>
         );
     }

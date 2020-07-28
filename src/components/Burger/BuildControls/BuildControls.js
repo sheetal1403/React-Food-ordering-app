@@ -15,7 +15,9 @@ const buildControls = (props) => {
     })
 
     return (
+        
         <div className={classes.BuildControls}>
+            <p>Price : <strong>{props.price}</strong></p>
             {controls}
         </div>
     );
