@@ -5,7 +5,10 @@ import classes from './BuildControls.css';
 const buildControls = (props) => {
 
     const controls = Object.keys(props.ingredients).map((ingredKey) => {
-        return <BuildSingleControl label={ingredKey}></BuildSingleControl>
+        return <BuildSingleControl 
+                    key={ingredKey} 
+                    label={ingredKey}
+                    addIngredient={props.addIngredient}></BuildSingleControl>
     })
 
     return (
