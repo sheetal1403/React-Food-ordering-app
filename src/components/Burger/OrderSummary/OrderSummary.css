@@ -1,0 +1,14 @@
+.Checkout{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.List{
+    list-style: none;
+    padding: 0;
+}
+
+.List li{
+    padding: 5px 0;
+}

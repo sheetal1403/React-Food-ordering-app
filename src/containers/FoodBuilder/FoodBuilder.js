@@ -76,6 +76,10 @@ class FoodBuilder extends Component{
         this.setState({orderClicked: true})
     }
 
+    closeModal = () => {
+        this.setState({orderClicked: false})
+    }
+
     //This is an arrow function. setState is undefined
     // purchaseHandler(){
     //     console.log(this);
@@ -87,8 +91,12 @@ class FoodBuilder extends Component{
         return(
             
             <Aux>
-                <Modal showModal={this.state.orderClicked}> 
-                    <OrderSummary ingredients={this.state.burgerAddOns}/>
+                <Modal showModal={this.state.orderClicked} closeModal={this.closeModal}> 
+                    <OrderSummary 
+                        ingredients={this.state.burgerAddOns}
+                        totalPrice={this.state.totalPrice}
+                        closeModal={this.closeModal}
+                        checkout={this.checkout}/>
                 </Modal>
                 <Burger addOns = {this.state.burgerAddOns}></Burger>
 
