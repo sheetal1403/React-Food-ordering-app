@@ -4,7 +4,10 @@ import classes from './BuildSingleControl.css';
 const buildSingleControl =(props) => (
     <div className={classes.BuildControl}>
         <div className={classes.Label}>{props.label}</div>
-        <button className={classes.Less}>Less</button>
+        <button
+            disabled={props.disabled} 
+            className={classes.Less}
+            onClick={() => props.removeIngredient(props.label)}>Less</button>
         <button 
             className={classes.More}
             onClick={() => props.addIngredient(props.label)}>More</button>

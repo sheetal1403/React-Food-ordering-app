@@ -5,10 +5,13 @@ import classes from './BuildControls.css';
 const buildControls = (props) => {
 
     const controls = Object.keys(props.ingredients).map((ingredKey) => {
+        const disabled = props.ingredients[ingredKey] <= 0 ? true : false;
         return <BuildSingleControl 
                     key={ingredKey} 
                     label={ingredKey}
-                    addIngredient={props.addIngredient}></BuildSingleControl>
+                    addIngredient={props.addIngredient}
+                    removeIngredient={props.removeIngredient}
+                    disabled={disabled}></BuildSingleControl>
     })
 
     return (
