@@ -19,7 +19,22 @@ class FoodBuilder extends Component{
             bacon: 0,
             cheese: 0
         },
-        totalPrice: 50
+        totalPrice: 50,
+        canBeBought: false
+    }
+
+    updateCanBeBought(ingreds){
+
+        const sum = Object.keys(ingreds).map((ingredKey) => {
+            return ingreds[ingredKey]
+        })
+       
+        .reduce((sum, el) => sum + el);
+        console.log(sum);
+        if(sum > 0){
+            this.setState({canBeBought: true})
+        }
+        // console.log(this.state.canBeBought)
     }
 
     addIngredientHandler = (type) => {
@@ -31,6 +46,10 @@ class FoodBuilder extends Component{
             burgerAddOns: ingreds,
             totalPrice: updatedTotalPrice
         })
+
+        this.updateCanBeBought(ingreds);
+        
+
     }
 
     removeIngredientHandler = (type) => {
@@ -46,6 +65,8 @@ class FoodBuilder extends Component{
             burgerAddOns: ingreds,
             totalPrice: updatedTotalPrice
         })
+
+        this.updateCanBeBought(ingreds);
     }
 
 
@@ -61,7 +82,8 @@ class FoodBuilder extends Component{
                     ingredients={this.state.burgerAddOns} 
                     addIngredient={this.addIngredientHandler}
                     removeIngredient={this.removeIngredientHandler}
-                    price={this.state.totalPrice}></BuildControls>
+                    price={this.state.totalPrice}
+                    canBeBought={this.state.canBeBought}></BuildControls>
             </Aux>
         );
     }

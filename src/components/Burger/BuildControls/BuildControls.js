@@ -14,11 +14,15 @@ const buildControls = (props) => {
                     disabled={disabled}></BuildSingleControl>
     })
 
+
     return (
         
         <div className={classes.BuildControls}>
             <p>Price : <strong>{props.price}</strong></p>
             {controls}
+            <button 
+                className={classes.OrderButton}
+                disabled={!props.canBeBought}>Order now!</button>
         </div>
     );
 
