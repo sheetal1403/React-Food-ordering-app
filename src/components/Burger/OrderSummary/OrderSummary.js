@@ -13,6 +13,7 @@ const orderSummary = (props) => {
             <ul>
                 {addOnsSummary}
             </ul>
+            
     </Aux>
     );
 }

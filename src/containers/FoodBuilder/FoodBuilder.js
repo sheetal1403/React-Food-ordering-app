@@ -22,7 +22,8 @@ class FoodBuilder extends Component{
             cheese: 0
         },
         totalPrice: 50,
-        canBeBought: false
+        canBeBought: false,
+        orderClicked: false
     }
 
     updateCanBeBought(ingreds){
@@ -32,7 +33,6 @@ class FoodBuilder extends Component{
         })
        
         .reduce((sum, el) => sum + el);
-        console.log(sum);
         if(sum > 0){
             this.setState({canBeBought: true})
         }
@@ -71,12 +71,23 @@ class FoodBuilder extends Component{
         this.updateCanBeBought(ingreds);
     }
 
+    purchaseHandler = () => {
+        console.log(this);
+        this.setState({orderClicked: true})
+    }
+
+    //This is an arrow function. setState is undefined
+    // purchaseHandler(){
+    //     console.log(this);
+    //     // this.setState({orderClicked: true})
+    // }
+
 
     render(){ 
         return(
             
             <Aux>
-                <Modal>
+                <Modal showModal={this.state.orderClicked}> 
                     <OrderSummary ingredients={this.state.burgerAddOns}/>
                 </Modal>
                 <Burger addOns = {this.state.burgerAddOns}></Burger>
@@ -86,7 +97,8 @@ class FoodBuilder extends Component{
                     addIngredient={this.addIngredientHandler}
                     removeIngredient={this.removeIngredientHandler}
                     price={this.state.totalPrice}
-                    canBeBought={this.state.canBeBought}></BuildControls>
+                    canBeBought={this.state.canBeBought}
+                    ordered={this.purchaseHandler}></BuildControls>
             </Aux>
         );
     }
