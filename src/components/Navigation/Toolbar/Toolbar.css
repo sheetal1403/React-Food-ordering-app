@@ -16,3 +16,21 @@
 .Toolbar nav{
     height: 100%;
 }
+
+.Logo{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+/* Mobile devices */
+.Nav{
+    opacity: 0;
+}
+
+@media(min-width: 500px){
+    .Nav{
+        opacity: 1;
+        height: 100%;
+    }
+}

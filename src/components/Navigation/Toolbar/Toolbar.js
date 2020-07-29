@@ -1,13 +1,19 @@
 import React from 'react'
 import classes from './Toolbar.css'
 import Logo from '../../Logo/Logo';
+import NavigationItems from '../NavigationItems/NavigationItems';
 
 const toolbar = (props) => (
     <header className={classes.Toolbar}>
-        <Logo></Logo>
+        {/* <Logo height="60%"></Logo> ---> One way, pass the height dynamically*/}
+        <div className={classes.Logo}>
+            <Logo/>
+        </div>
         <div>MENU</div>
-        <nav>...</nav>
+        <div className={classes.Nav}>
+            <NavigationItems></NavigationItems>
+        </div>
+        
     </header>
 );
-
 export default toolbar;

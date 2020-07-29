@@ -1,4 +1,6 @@
+/*Mobile devices*/
 .Logo{
+    /* height: 7%; */
     height: 60%;
     cursor: pointer;
     box-sizing: border-box;
@@ -10,3 +12,11 @@
 .Logo img{
     height: 100%;
 }
+
+/* One way of responsive deisgn */
+/* Desktop devices */
+/* @media (min-width: 500px){
+    .Logo{
+        height: 60%;
+    }
+} */
