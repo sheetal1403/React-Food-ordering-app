@@ -80,7 +80,7 @@ class FoodBuilder extends Component{
         this.setState({orderClicked: false})
     }
 
-    //This is an arrow function. setState is undefined
+    //This is not an arrow function. setState is undefined
     // purchaseHandler(){
     //     console.log(this);
     //     // this.setState({orderClicked: true})
