@@ -6,6 +6,7 @@ import Aux from '../../..//hoc/Auxillary/Auxillary';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 
 
+
 const sideDrawer = (props) => {
 
     const toggleClass = props.showSideDrawer ? classes.Open : classes.Close;
@@ -18,7 +19,7 @@ const sideDrawer = (props) => {
             <div className={classesList}>
                 <div className={classes.Logo}>
                     <Logo/>
-                    <span onClick={props.close}>Close</span>
+                    <span onClick={props.close}><i className="fa fa-times" aria-hidden="true"></i></span>
                 </div>
                 <nav>
                     <NavigationItems/>

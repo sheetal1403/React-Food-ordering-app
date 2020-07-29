@@ -1,3 +1,4 @@
+/* Mobile devices */
 .Toolbar{
     width: 100%;
     height: 60px;
@@ -23,19 +24,24 @@
     align-items: center;
 }
 
-/* Mobile devices */
 .Nav{
     display: none;
 }
 
+.Menu{
+    display: block;
+}
+
+
+/* Desktop devices */
 @media(min-width: 500px){
     .Nav{
         display: flex;
         height: 100%;
     }
+
+    .Menu{
+        display: none;
+    }
 }
 
-.Menu{
-    cursor: pointer;
-    color: white;
-}
