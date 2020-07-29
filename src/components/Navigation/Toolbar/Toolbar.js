@@ -9,7 +9,7 @@ const toolbar = (props) => (
         <div className={classes.Logo}>
             <Logo/>
         </div>
-        <div>MENU</div>
+        <div onClick={props.open} className={classes.Menu}>MENU</div>
         <div className={classes.Nav}>
             <NavigationItems></NavigationItems>
         </div>

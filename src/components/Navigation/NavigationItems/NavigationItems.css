@@ -2,17 +2,19 @@
 .NavigationItems{
     list-style: none;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
-    margin: 0;
+    /* margin-top: 40px; */
     padding: 0;
     height: 100%;
     flex-direction: column;
+    margin: 0;
 }
 
 /* Desktop devices */
 @media(min-width: 500px){
     .NavigationItems{
         flex-direction: row;
+       
     }
 }
