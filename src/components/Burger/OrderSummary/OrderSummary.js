@@ -1,32 +1,39 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Aux from '../../../hoc/Auxillary/Auxillary';
 import Button from '../../UI/Button/Button';
 import classes from './OrderSummary.css';
 
-const orderSummary = (props) => {
+class OrderSummary extends Component{
 
-    const addOnsSummary = Object.keys(props.ingredients).map((ingredKey) => {
-        return <li key={ingredKey}>{ingredKey.toUpperCase()} : {props.ingredients[ingredKey]}</li>
-    });
+    componentWillUpdate(){
+        console.log('order summary update');
+    }
 
-    return (
-        <Aux>
-            <h3>Your Order</h3>
-            <ul className={classes.List}>
-                {addOnsSummary}
-            </ul>
-            <p>Total price : {props.totalPrice}</p>
-            <div className={classes.Checkout}>
-                <p>Want to checkout ?</p>
-                <Button btnType="Success" clicked={props.checkout}>Yes!</Button>
-                <Button btnType="Danger" clicked={props.closeModal}>Go back</Button>
-            </div>
-            
-            
-    </Aux>
-    );
+    render(){
+
+        const addOnsSummary = Object.keys(this.props.ingredients).map((ingredKey) => {
+            return <li key={ingredKey}>{ingredKey.toUpperCase()} : {this.props.ingredients[ingredKey]}</li>
+        });
+
+        return (
+            <Aux>
+                <h3>Your Order</h3>
+                <ul className={classes.List}>
+                    {addOnsSummary}
+                </ul>
+                <p>Total price : {this.props.totalPrice}</p>
+                <div className={classes.Checkout}>
+                    <p>Want to checkout ?</p>
+                    <Button btnType="Success" clicked={this.props.checkout}>Yes!</Button>
+                    <Button btnType="Danger" clicked={this.props.closeModal}>Go back</Button>
+                </div>       
+        </Aux>
+        );
+    }
+
+    
 }
     
 ;
 
-export default orderSummary;
+export default OrderSummary;

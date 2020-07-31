@@ -11,7 +11,6 @@ const sideDrawer = (props) => {
 
     const toggleClass = props.showSideDrawer ? classes.Open : classes.Close;
     const classesList = [classes.SideDrawer, toggleClass].join(' ');
-    console.log(classesList);
 
     return(
         <Aux>
