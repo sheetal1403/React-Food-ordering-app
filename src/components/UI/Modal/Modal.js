@@ -11,11 +11,11 @@ class Modal extends Component{
         //     return true;
         // }
         //     return false;
-        return (nextProps.showModal !== this.props.showModal);
+        return (nextProps.showModal !== this.props.showModal || nextProps.children !== this.props.children);
     }
 
     componentWillUpdate() {
-        console.log('Modal update')
+        // console.log('Modal update')
     }
 
     render(){

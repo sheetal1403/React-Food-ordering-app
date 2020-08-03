@@ -6,6 +6,7 @@ import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Aux from '../../hoc/Auxillary/Auxillary';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 
 const ADDONS_PRICES = {
@@ -26,7 +27,8 @@ class FoodBuilder extends Component{
         },
         totalPrice: 50,
         canBeBought: false,
-        orderClicked: false
+        orderClicked: false,
+        loading: false
     }
 
     updateCanBeBought(ingreds){
@@ -75,7 +77,6 @@ class FoodBuilder extends Component{
     }
 
     purchaseHandler = () => {
-        console.log(this);
         this.setState({orderClicked: true})
     }
 
@@ -84,6 +85,9 @@ class FoodBuilder extends Component{
     }
 
     checkoutHandler = () => {
+        this.setState({
+            loading: true
+        });
         const order = {
             ingredients: this.state.burgerAddOns,
             totalPrice: this.state.totalPrice, //Total price should actually be calculated in server. The customer can modify this data otherwise
@@ -98,8 +102,14 @@ class FoodBuilder extends Component{
             } 
         };
         axios.post('/orders.json', order)
-            .then(response => console.log(response))
-            .catch(error => console.log(error));
+            .then(response => {
+                this.setState({
+                    loading: false,
+                    orderClicked: false
+                });
+                console.log(response);
+            })
+            .catch(error =>console.log(error) );
     }
 
     //This is not an arrow function. setState is undefined
@@ -110,15 +120,22 @@ class FoodBuilder extends Component{
 
 
     render(){ 
+        let modalContents = <OrderSummary 
+        ingredients={this.state.burgerAddOns}
+        totalPrice={this.state.totalPrice}
+        closeModal={this.closeModal}
+        checkout={this.checkoutHandler}/>;
+        
+        if(this.state.loading){
+            modalContents = <Spinner/>
+        }
+
         return(
             
             <Aux>
                 <Modal showModal={this.state.orderClicked} closeModal={this.closeModal}> 
-                    <OrderSummary 
-                        ingredients={this.state.burgerAddOns}
-                        totalPrice={this.state.totalPrice}
-                        closeModal={this.closeModal}
-                        checkout={this.checkoutHandler}/>
+                    {modalContents}
+                    
                 </Modal>
                 <Burger addOns = {this.state.burgerAddOns}></Burger>
 

@@ -6,7 +6,7 @@ import classes from './OrderSummary.css';
 class OrderSummary extends Component{
 
     componentWillUpdate(){
-        console.log('order summary update');
+        // console.log('order summary update');
     }
 
     render(){
