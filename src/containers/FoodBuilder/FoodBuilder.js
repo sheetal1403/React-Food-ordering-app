@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from '../../axios-orders';
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
@@ -7,6 +8,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Aux from '../../hoc/Auxillary/Auxillary';
 import Spinner from '../../components/UI/Spinner/Spinner';
+
 
 
 const ADDONS_PRICES = {
@@ -107,7 +109,7 @@ class FoodBuilder extends Component{
                     loading: false,
                     orderClicked: false
                 });
-                console.log(response);
+                // console.log(response);
             })
             .catch(error =>console.log(error) );
     }
@@ -151,4 +153,4 @@ class FoodBuilder extends Component{
     }
 };
 
-export default FoodBuilder;
+export default withErrorHandler(FoodBuilder, axios);
