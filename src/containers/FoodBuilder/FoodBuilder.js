@@ -21,16 +21,21 @@ const ADDONS_PRICES = {
 class FoodBuilder extends Component{
 
     state = {
-        burgerAddOns : {
-            salad: 0,
-            meat: 0,
-            bacon: 0,
-            cheese: 0
-        },
+        burgerAddOns : null,
         totalPrice: 50,
         canBeBought: false,
         orderClicked: false,
-        loading: false
+        loading: false,
+        error: false
+    }
+
+    componentDidMount(){
+        axios.get('/burgerAddOns.json')
+            .then(response => {
+                this.setState({burgerAddOns: response.data});
+            }).catch(e => {
+                this.setState({error: true})
+            });
     }
 
     updateCanBeBought(ingreds){
@@ -122,32 +127,47 @@ class FoodBuilder extends Component{
 
 
     render(){ 
-        let modalContents = <OrderSummary 
-        ingredients={this.state.burgerAddOns}
-        totalPrice={this.state.totalPrice}
-        closeModal={this.closeModal}
-        checkout={this.checkoutHandler}/>;
         
-        if(this.state.loading){
-            modalContents = <Spinner/>
-        }
+
+        let burger = this.state.error ? <p style={{textAlign: 'center'}}>Sorry! Loading error</p> : <Spinner/>
+        let orderSummary = <Spinner/>
+        
+        if(this.state.burgerAddOns){
+            burger = (
+                <Aux>
+                    <Burger addOns = {this.state.burgerAddOns}></Burger>
+                    <BuildControls 
+                        ingredients={this.state.burgerAddOns} 
+                        addIngredient={this.addIngredientHandler}
+                        removeIngredient={this.removeIngredientHandler}
+                        price={this.state.totalPrice}
+                        canBeBought={this.state.canBeBought}
+                        ordered={this.purchaseHandler}></BuildControls>
+                </Aux>
+            );
+            orderSummary = <OrderSummary 
+                                ingredients={this.state.burgerAddOns}
+                                totalPrice={this.state.totalPrice}
+                                closeModal={this.closeModal}
+                                checkout={this.checkoutHandler}/>;
+            }
+
+            
+            if(this.state.loading){
+                orderSummary = <Spinner/>
+            }
+        
+       
 
         return(
             
             <Aux>
                 <Modal showModal={this.state.orderClicked} closeModal={this.closeModal}> 
-                    {modalContents}
+                    {orderSummary}
                     
                 </Modal>
-                <Burger addOns = {this.state.burgerAddOns}></Burger>
-
-                <BuildControls 
-                    ingredients={this.state.burgerAddOns} 
-                    addIngredient={this.addIngredientHandler}
-                    removeIngredient={this.removeIngredientHandler}
-                    price={this.state.totalPrice}
-                    canBeBought={this.state.canBeBought}
-                    ordered={this.purchaseHandler}></BuildControls>
+                {burger}
+                
             </Aux>
         );
     }

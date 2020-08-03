@@ -9,7 +9,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
                 error: null
             }
 
-            componentDidMount(){
+            componentWillMount(){
                 console.log('error handler');
 
                 axios.interceptors.request.use(request => {
@@ -22,11 +22,13 @@ const withErrorHandler = (WrappedComponent, axios) => {
 
                 axios.interceptors.response.use(response => response, error => {
                     // console.log(error.message);
+                    console.log(error.message)
                     this.setState({error: error.message})
                 })
             }
 
             closeModal = () => {
+
                 this.setState({error: null});
             }
 
