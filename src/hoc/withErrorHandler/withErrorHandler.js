@@ -9,10 +9,12 @@ const withErrorHandler = (WrappedComponent, axios) => {
                 error: null
             }
 
-            componentWillMount(){
-                console.log('error handler');
+            requestInterceptor;
+            responseInterceptor;
 
-                axios.interceptors.request.use(request => {
+            //Can be done in constructer as well. WillMount is deprecated
+            componentWillMount(){
+                this.requestInterceptor = axios.interceptors.request.use(request => {
                     this.setState({error: null});
                     return request;
                 }, error => {
@@ -20,11 +22,16 @@ const withErrorHandler = (WrappedComponent, axios) => {
                     this.setState({error: error.message})
                 })
 
-                axios.interceptors.response.use(response => response, error => {
+                this.responseInterceptor = axios.interceptors.response.use(response => response, error => {
                     // console.log(error.message);
                     console.log(error.message)
                     this.setState({error: error.message})
                 })
+            }
+
+            componentWillUnmount(){
+                axios.interceptors.request.eject(this.requestInterceptor);
+                axios.interceptors.response.eject(this.responseInterceptor);
             }
 
             closeModal = () => {
