@@ -8,6 +8,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Aux from '../../hoc/Auxillary/Auxillary';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import { Redirect } from 'react-router-dom';
 
 
 
@@ -92,31 +93,35 @@ class FoodBuilder extends Component{
     }
 
     checkoutHandler = () => {
-        this.setState({
-            loading: true
-        });
-        const order = {
-            ingredients: this.state.burgerAddOns,
-            totalPrice: this.state.totalPrice, //Total price should actually be calculated in server. The customer can modify this data otherwise
-            customer: {
-                name: 'Sara',
-                address: {
-                    street: 'Lincoln road',
-                    pinCode: '5699',
-                    city: 'bangalore'
-                },
-                email: 'example.com'
-            } 
-        };
-        axios.post('/orders.json', order)
-            .then(response => {
-                this.setState({
-                    loading: false,
-                    orderClicked: false
-                });
-                // console.log(response);
-            })
-            .catch(error =>console.log(error) );
+        // this.setState({
+        //     loading: true
+        // });
+        // const order = {
+        //     ingredients: this.state.burgerAddOns,
+        //     totalPrice: this.state.totalPrice, //Total price should actually be calculated in server. The customer can modify this data otherwise
+        //     customer: {
+        //         name: 'Sara',
+        //         address: {
+        //             street: 'Lincoln road',
+        //             pinCode: '5699',
+        //             city: 'bangalore'
+        //         },
+        //         email: 'example.com'
+        //     } 
+        // };
+        // axios.post('/orders.json', order)
+        //     .then(response => {
+        //         this.setState({
+        //             loading: false,
+        //             orderClicked: false
+        //         });
+        //         this.props.history.push({pathname: '/checkout'});
+        //         // <Redirect to="/checkout"/>
+        //         // console.log(response);
+        //     })
+        //     .catch(error =>console.log(error) );
+
+        this.props.history.push('/checkout');
     }
 
     //This is not an arrow function. setState is undefined

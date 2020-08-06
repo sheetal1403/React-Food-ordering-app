@@ -4,8 +4,8 @@ import NavigationSingleItem from './NavigationSingleItem/NavigationSingleItem';
 
 const navigationItems = (props) => (
     <ul className={classes.NavigationItems}>
-        <NavigationSingleItem link = "/" active>Home</NavigationSingleItem>
-        <NavigationSingleItem link = "/" >Checkout</NavigationSingleItem>
+        <NavigationSingleItem link = "/">Home</NavigationSingleItem>
+        <NavigationSingleItem link = "/checkout" >Checkout</NavigationSingleItem>
         
     </ul>
 );
