@@ -12,7 +12,8 @@ class Checkout extends Component{
             bacon: 0,
             cheese: 0,
             meat: 0
-        }
+        },
+        price: 0
     }
 
     componentDidMount(){
@@ -23,7 +24,12 @@ class Checkout extends Component{
         const query = new URLSearchParams(this.props.location.search);
         const addOns = {};
         for(let param of query.entries()){
-            addOns[param[0]] = +param[1];
+            if(param[0] === 'price'){
+                this.setState({price: param[1]})
+            }else{
+                addOns[param[0]] = +param[1];
+            }
+            
         }
         if(Object.keys(addOns).length > 0){
             this.setState({addOns: addOns})
@@ -47,7 +53,9 @@ class Checkout extends Component{
                 addOns={this.state.addOns}
                 continueCheckout={this.continueCheckoutHandler}
                 cancelCheckout={this.cancelCheckoutHandler}></CheckoutSummary>
-                <Route path={this.props.match.path + '/contact'} component={ContactData}/>
+                <Route 
+                    path={this.props.match.path + '/contact'} 
+                    render={(props) => (<ContactData addOns={this.state.addOns} price={this.state.price} { ...props }/>)}/>
             </Aux>
             
         );

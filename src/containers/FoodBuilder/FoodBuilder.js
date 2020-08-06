@@ -125,7 +125,7 @@ class FoodBuilder extends Component{
         for(let i in this.state.burgerAddOns){
             queryParams.push(encodeURIComponent(i)+'='+encodeURIComponent(this.state.burgerAddOns[i]));
         };
-        console.log(queryParams)
+        queryParams.push("price="+this.state.totalPrice);
 
         this.props.history.push({
             pathname: '/checkout',
