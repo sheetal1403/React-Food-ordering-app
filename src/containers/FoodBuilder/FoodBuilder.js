@@ -8,7 +8,6 @@ import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Aux from '../../hoc/Auxillary/Auxillary';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import { Redirect } from 'react-router-dom';
 
 
 
