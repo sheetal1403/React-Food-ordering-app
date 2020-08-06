@@ -11,8 +11,8 @@ const checkoutSummary = (props) => {
                     <Burger addOns={props.addOns}/>
                     
                 </div>
-                <Button btnType="Success" clicked>Continue</Button>
-                <Button btnType="Danger" clicked>Cancel</Button>
+                <Button btnType="Success" clicked={props.continueCheckout}>Continue</Button>
+                <Button btnType="Danger" clicked={props.cancelCheckout}>Cancel</Button>
 
                 
                 

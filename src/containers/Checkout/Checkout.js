@@ -12,9 +12,34 @@ class Checkout extends Component{
         }
     }
 
+    componentDidMount(){
+        this.parseQueryParams();
+    }
+
+    parseQueryParams = () => {
+        const query = new URLSearchParams(this.props.location.search);
+        const addOns = {};
+        for(let param of query.entries()){
+            addOns[param[0]] = +param[1];
+        }
+        this.setState({addOns: addOns})
+        
+    }
+
+    continueCheckoutHandler = () => {
+        this.props.history.replace('/checkout/contact');
+    }
+
+    cancelCheckoutHandler =() => {
+        this.props.history.goBack();
+    }
+
     render(){
         return(
-            <CheckoutSummary addOns={this.state.addOns}></CheckoutSummary>
+            <CheckoutSummary 
+                addOns={this.state.addOns}
+                continueCheckout={this.continueCheckoutHandler}
+                cancelCheckout={this.cancelCheckoutHandler}></CheckoutSummary>
         );
     }
 };

@@ -119,10 +119,19 @@ class FoodBuilder extends Component{
         //         // <Redirect to="/checkout"/>
         //         // console.log(response);
         //     })
-        //     .catch(error =>console.log(error) );
+        //     .catch(error =>console.log(error) ); 
 
-        this.props.history.push('/checkout');
-    }
+        const queryParams = [];
+        for(let i in this.state.burgerAddOns){
+            queryParams.push(encodeURIComponent(i)+'='+encodeURIComponent(this.state.burgerAddOns[i]));
+        };
+        console.log(queryParams)
+
+        this.props.history.push({
+            pathname: '/checkout',
+            search: '?' + queryParams.join('&')
+    });
+}
 
     //This is not an arrow function. setState is undefined
     // purchaseHandler(){
