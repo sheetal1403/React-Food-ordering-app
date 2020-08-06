@@ -3,6 +3,7 @@ import BurgerAddOns from '../Burger/BurgerAddOns/BurgerAddOns';
 import classes from './Burger.css';
 
 const burger = (props) => {
+
     
     let transformedAddOns = Object.keys(props.addOns).map((addOnKey) => {
         return [...Array(props.addOns[addOnKey])].map((_,i) => {

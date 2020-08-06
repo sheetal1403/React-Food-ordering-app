@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
+import ContactData from '../Checkout/ContactData/ContactData';
+import Aux from '../../hoc/Auxillary/Auxillary';
+import { Route } from 'react-router';
 
 class Checkout extends Component{
 
     state = {
         addOns: {
-            salad: 1,
-            bacon: 1,
-            cheese: 1,
-            meat: 1
+            salad: 0,
+            bacon: 0,
+            cheese: 0,
+            meat: 0
         }
     }
 
@@ -22,7 +25,10 @@ class Checkout extends Component{
         for(let param of query.entries()){
             addOns[param[0]] = +param[1];
         }
-        this.setState({addOns: addOns})
+        if(Object.keys(addOns).length > 0){
+            this.setState({addOns: addOns})
+        }
+        
         
     }
 
@@ -36,10 +42,14 @@ class Checkout extends Component{
 
     render(){
         return(
-            <CheckoutSummary 
+            <Aux>
+                <CheckoutSummary 
                 addOns={this.state.addOns}
                 continueCheckout={this.continueCheckoutHandler}
                 cancelCheckout={this.cancelCheckoutHandler}></CheckoutSummary>
+                <Route path={this.props.match.path + '/contact'} component={ContactData}/>
+            </Aux>
+            
         );
     }
 };
