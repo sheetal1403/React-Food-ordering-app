@@ -19,7 +19,6 @@ class ContactData extends Component{
 
     orderHandler = (event) => {
         event.preventDefault();
-        console.log(this.state.orderForm);
         this.setState({
             loading: true
         });
@@ -50,10 +49,10 @@ class ContactData extends Component{
     render(){
         let form = (
             <form onSubmit={this.orderHandler}>
-                <Input inputtype='input' type="text" name="name" placeholder="Enter your name" onChange={this.inputChangedHandler}/>
-                <Input inputtype='input' type="email" name="email" placeholder="Enter your email" onChange={this.inputChangedHandler}/>
-                <Input inputtype='input' type="text" name="city" placeholder="Enter your city" onChange={this.inputChangedHandler}/>
-                <Input inputtype='input' type="text" name="country" placeholder="Enter your country" onChange={this.inputChangedHandler}/>
+                <Input inputtype='input' type="text" name="name" placeholder="Enter your name" required onChange={this.inputChangedHandler}/>
+                <Input inputtype='input' type="email" name="email" placeholder="Enter your email" required onChange={this.inputChangedHandler}/>
+                <Input inputtype='input' type="text" name="city" placeholder="Enter your city" required onChange={this.inputChangedHandler}/>
+                <Input inputtype='input' type="text" name="country" placeholder="Enter your country" required onChange={this.inputChangedHandler}/>
                 
                 {/* <input type="text" name="country" placeholder="Enter your country"/> */}
                 <Button btnType="Success">Order</Button>
