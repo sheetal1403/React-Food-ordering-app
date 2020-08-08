@@ -1,10 +1,17 @@
 import React from 'react';
+import classes from './SingleOrder.css'
 
-const singleOrder = () => (
-    <div>
-        <p>Ingredients</p>
-        <p>Price</p>
-    </div>
-);
+const singleOrder = (props) => {
+    const ingredients = Object.keys(props.ingredients).map(igKey => {
+        return <span>{igKey} - {props.ingredients[igKey]  }</span>
+    })
+    return (
+        <div className={classes.SingleOrder}>
+            <p>Ingredients: {ingredients}</p>
+            <p>Price: {props.price}</p>
+        </div>
+    );
+    
+};
 
 export default singleOrder;
