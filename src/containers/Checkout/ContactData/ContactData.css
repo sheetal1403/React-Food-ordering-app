@@ -2,4 +2,7 @@
     text-align: center;
     width: 80%;
     margin: auto;
+    border:  1px solid #dcdcdc;
+    margin-top: 60px;
+    margin-bottom: 30px;
 }
