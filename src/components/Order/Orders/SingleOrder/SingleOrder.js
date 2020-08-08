@@ -3,7 +3,7 @@ import classes from './SingleOrder.css'
 
 const singleOrder = (props) => {
     const ingredients = Object.keys(props.ingredients).map(igKey => {
-        return <span>{igKey} - {props.ingredients[igKey]  }</span>
+        return <span key={igKey}>{igKey} - {props.ingredients[igKey]  }</span>
     })
     return (
         <div className={classes.SingleOrder}>
