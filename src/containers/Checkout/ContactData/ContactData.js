@@ -8,26 +8,26 @@ import Input from '../../../components/UI/Input/Input';
 class ContactData extends Component{
 
     state = {
+        orderForm:  {
+            name: '',
+            email: '',
+            city: ' ',
+            country: ''
+        },    
         loading: false
     }
 
     orderHandler = (event) => {
         event.preventDefault();
+        console.log(this.state.orderForm);
         this.setState({
             loading: true
         });
         const order = {
             ingredients: this.props.addOns,
             totalPrice: this.props.price, //Total price should actually be calculated in server. The customer can modify this data otherwise
-            customer: {
-                name: 'Sara',
-                address: {
-                    street: 'Lincoln road',
-                    pinCode: '5699',
-                    city: 'bangalore'
-                },
-                email: 'example.com'
-            } 
+            customerData: this.state.orderForm
+            
         };
         axios.post('/orders.json', order)
             .then(response => {
@@ -39,16 +39,24 @@ class ContactData extends Component{
             .catch(error =>console.log(error) ); 
     }
 
+    inputChangedHandler = (event) => {
+        const orderFormCopy = { ...this.state.orderForm };
+        orderFormCopy[event.target.name] = event.target.value;
+        this.setState({
+            orderForm: orderFormCopy
+        });
+    }
+
     render(){
         let form = (
-            <form>
-                <Input inputtype='input' type="text" name="name" placeholder="Enter your name"/>
-                <Input inputtype='input' type="text" name="email" placeholder="Enter your email"/>
-                <Input inputtype='input' type="text" name="city" placeholder="Enter your city"/>
-                <Input inputtype='input' type="text" name="country" placeholder="Enter your country"/>
+            <form onSubmit={this.orderHandler}>
+                <Input inputtype='input' type="text" name="name" placeholder="Enter your name" onChange={this.inputChangedHandler}/>
+                <Input inputtype='input' type="email" name="email" placeholder="Enter your email" onChange={this.inputChangedHandler}/>
+                <Input inputtype='input' type="text" name="city" placeholder="Enter your city" onChange={this.inputChangedHandler}/>
+                <Input inputtype='input' type="text" name="country" placeholder="Enter your country" onChange={this.inputChangedHandler}/>
                 
                 {/* <input type="text" name="country" placeholder="Enter your country"/> */}
-                <Button btnType="Success" clicked={this.orderHandler}>Order</Button>
+                <Button btnType="Success">Order</Button>
             </form>
         );
 
