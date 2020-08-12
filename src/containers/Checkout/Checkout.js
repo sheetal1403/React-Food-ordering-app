@@ -16,6 +16,7 @@ class Checkout extends Component{
         price: 0
     }
 
+    //Here didMount works because addOns is not null. If it is set to null, use willMount or contructor to parse the query params as it will executed before the render method
     componentDidMount(){
         this.parseQueryParams();
     }
