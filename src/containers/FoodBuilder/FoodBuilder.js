@@ -12,14 +12,6 @@ import Aux from '../../hoc/Auxillary/Auxillary';
 import Spinner from '../../components/UI/Spinner/Spinner';
 
 
-
-const ADDONS_PRICES = {
-    salad: 20,
-    meat: 70,
-    bacon: 80,
-    cheese: 30
-}
-
 class FoodBuilder extends Component{
 
     state = {
@@ -48,42 +40,43 @@ class FoodBuilder extends Component{
        
         .reduce((sum, el) => sum + el);
         if(sum > 0){
-            this.setState({canBeBought: true})
+            return true;
         }
+        return false;
         // console.log(this.state.canBeBought)
     }
 
-    addIngredientHandler = (type) => {
-        const ingreds = {...this.state.burgerAddOns};
-        ingreds[type]++;
-        const oldPrice = this.state.totalPrice;
-        const updatedTotalPrice = oldPrice + ADDONS_PRICES[type];
-        this.setState({
-            burgerAddOns: ingreds,
-            totalPrice: updatedTotalPrice
-        })
+    // addIngredientHandler = (type) => {
+    //     const ingreds = {...this.state.burgerAddOns};
+    //     ingreds[type]++;
+    //     const oldPrice = this.state.totalPrice;
+    //     const updatedTotalPrice = oldPrice + ADDONS_PRICES[type];
+    //     this.setState({
+    //         burgerAddOns: ingreds,
+    //         totalPrice: updatedTotalPrice
+    //     })
 
-        this.updateCanBeBought(ingreds);
+    //     this.updateCanBeBought(ingreds);
         
 
-    }
+    // }
 
-    removeIngredientHandler = (type) => {
+    // removeIngredientHandler = (type) => {
         
-        const ingreds = {...this.state.burgerAddOns};
-        if(ingreds[type] <= 0){
-            return;
-        }
-        ingreds[type]--;
-        const oldPrice = this.state.totalPrice;
-        const updatedTotalPrice = oldPrice - ADDONS_PRICES[type];
-        this.setState({
-            burgerAddOns: ingreds,
-            totalPrice: updatedTotalPrice
-        })
+    //     const ingreds = {...this.state.burgerAddOns};
+    //     if(ingreds[type] <= 0){
+    //         return;
+    //     }
+    //     ingreds[type]--;
+    //     const oldPrice = this.state.totalPrice;
+    //     const updatedTotalPrice = oldPrice - ADDONS_PRICES[type];
+    //     this.setState({
+    //         burgerAddOns: ingreds,
+    //         totalPrice: updatedTotalPrice
+    //     })
 
-        this.updateCanBeBought(ingreds);
-    }
+    //     this.updateCanBeBought(ingreds);
+    // }
 
     purchaseHandler = () => {
         this.setState({orderClicked: true})
@@ -156,7 +149,7 @@ class FoodBuilder extends Component{
                         addIngredient={this.props.onIngredientAdded}
                         removeIngredient={this.props.onIngredientRemoved}
                         price={this.props.price}
-                        canBeBought={this.state.canBeBought}
+                        canBeBought={this.updateCanBeBought(this.props.burgerAddOns)}
                         ordered={this.purchaseHandler}></BuildControls>
                 </Aux>
             );
