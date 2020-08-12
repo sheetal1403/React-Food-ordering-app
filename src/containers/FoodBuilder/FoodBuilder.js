@@ -115,15 +115,15 @@ class FoodBuilder extends Component{
         //     })
         //     .catch(error =>console.log(error) ); 
 
-        const queryParams = [];
-        for(let i in this.props.burgerAddOns){
-            queryParams.push(encodeURIComponent(i)+'='+encodeURIComponent(this.props.burgerAddOns[i]));
-        };
-        queryParams.push("price="+this.props.price);
+        // const queryParams = [];
+        // for(let i in this.props.burgerAddOns){
+        //     queryParams.push(encodeURIComponent(i)+'='+encodeURIComponent(this.props.burgerAddOns[i]));
+        // };
+        // queryParams.push("price="+this.props.price);
 
         this.props.history.push({
-            pathname: '/checkout',
-            search: '?' + queryParams.join('&')
+            pathname: '/checkout'
+            // search: '?' + queryParams.join('&')
     });
 }
 

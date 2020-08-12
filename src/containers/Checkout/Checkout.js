@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 import ContactData from '../Checkout/ContactData/ContactData';
 import Aux from '../../hoc/Auxillary/Auxillary';
@@ -17,9 +18,9 @@ class Checkout extends Component{
     }
 
     //Here didMount works because addOns is not null. If it is set to null, use willMount or contructor to parse the query params as it will executed before the render method
-    componentDidMount(){
-        this.parseQueryParams();
-    }
+    // componentDidMount(){  //REDUX takes care of getting the state
+    //     this.parseQueryParams();
+    // }
 
     parseQueryParams = () => {
         const query = new URLSearchParams(this.props.location.search);
@@ -51,16 +52,23 @@ class Checkout extends Component{
         return(
             <Aux>
                 <CheckoutSummary 
-                addOns={this.state.addOns}
+                addOns={this.props.addOns}
                 continueCheckout={this.continueCheckoutHandler}
                 cancelCheckout={this.cancelCheckoutHandler}></CheckoutSummary>
                 <Route 
                     path={this.props.match.path + '/contact'} 
-                    render={(props) => (<ContactData addOns={this.state.addOns} price={this.state.price} { ...props }/>)}/>
+                    render={(props) => (<ContactData addOns={this.props.addOns} price={this.props.price} { ...props }/>)}/>
             </Aux>
             
         );
     }
 };
 
-export default Checkout;
+const mapStateToProps = state => {
+    return{
+        addOns: state.burgerAddOns,
+        price: state.price
+    }
+}
+
+export default connect(mapStateToProps)(Checkout);
