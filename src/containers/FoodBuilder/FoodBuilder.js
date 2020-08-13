@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from '../../axios-orders';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import * as actionTypes from '../../store/actions';
+
+import * as actionCreators from '../../store/actions/foodBuilder';
 
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
@@ -24,12 +25,14 @@ class FoodBuilder extends Component{
     }
 
     componentDidMount(){
-        axios.get('/burgerAddOns.json')
-            .then(response => {
-                this.setState({burgerAddOns: response.data});
-            }).catch(e => {
-                this.setState({error: true})
-            });
+        this.props.onInitIngredients();
+        //DONE IN THE ACTION CREATORS
+        // axios.get('/burgerAddOns.json')
+        //     .then(response => {
+        //         this.setState({burgerAddOns: response.data});
+        //     }).catch(e => {
+        //         this.setState({error: true})
+        //     });
     }
 
     updateCanBeBought(ingreds){
@@ -137,7 +140,7 @@ class FoodBuilder extends Component{
     render(){ 
         
 
-        let burger = this.state.error ? <p style={{textAlign: 'center'}}>Sorry! Loading error</p> : <Spinner/>
+        let burger = this.props.error ? <p style={{textAlign: 'center'}}>Sorry! Loading error</p> : <Spinner/>
         let orderSummary = <Spinner/>
         
         if(this.props.burgerAddOns){
@@ -184,7 +187,8 @@ class FoodBuilder extends Component{
 const mapStateToProps = state => {
     return{
         burgerAddOns : state.burgerAddOns,
-        price: state.price
+        price: state.price,
+        error: state.error
 
     }
     
@@ -192,8 +196,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        onIngredientAdded: (addOnType) => dispatch({type:actionTypes.ADD_ADDON, addOnType}),
-        onIngredientRemoved: (addOnType) => dispatch({type:actionTypes.REMOVE_ADDON, addOnType})
+        onIngredientAdded: (addOnType) => dispatch(actionCreators.addIngredient(addOnType)),
+        onIngredientRemoved: (addOnType) => dispatch(actionCreators.removeIngredient(addOnType)),
+        onInitIngredients: () => dispatch(actionCreators.initIngredients())
     }
 }
 

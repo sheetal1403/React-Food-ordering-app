@@ -1,0 +1,4 @@
+export const ADD_ADDON = 'ADD_ADDON';
+export const REMOVE_ADDON = 'REMOVE_ADDON';
+export const SET_ADDONS = 'SET_ADDONS';
+export const FETCH_ADDONS_FAILED = 'FETCH_ADDONS_FAILED';
