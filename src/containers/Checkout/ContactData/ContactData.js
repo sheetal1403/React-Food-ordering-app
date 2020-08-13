@@ -5,6 +5,8 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import classes from './ContactData.css';
 import axios from '../../../axios-orders';
 import Input from '../../../components/UI/Input/Input';
+import * as orderActionCreators from '../../../store/actions/index';
+import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 
 class ContactData extends Component{
 
@@ -14,29 +16,22 @@ class ContactData extends Component{
             email: '',
             city: ' ',
             country: ''
-        },    
-        loading: false
+        }
     }
 
     orderHandler = (event) => {
         event.preventDefault();
-        this.setState({
-            loading: true
-        });
+        // this.setState({
+        //     loading: true
+        // });
         const order = {
             ingredients: this.props.addOns,
             totalPrice: this.props.price, //Total price should actually be calculated in server. The customer can modify this data otherwise
             customerData: this.state.orderForm
             
         };
-        axios.post('/orders.json', order)
-            .then(response => {
-                this.setState({
-                    loading: false
-                });
-                this.props.history.push('/');
-            })
-            .catch(error =>console.log(error) ); 
+        this.props.onOrderSubmitted(order);
+    
     }
 
     inputChangedHandler = (event) => {
@@ -60,7 +55,7 @@ class ContactData extends Component{
             </form>
         );
 
-        if(this.state.loading){
+        if(this.props.loading){
             form = <Spinner/>;
         }
         return(
@@ -76,8 +71,15 @@ class ContactData extends Component{
 const mapStateToProps = state => {
     return{
         addOns: state.burgerAddOns,
-        price: state.price
+        price: state.price,
+        loading: state.loading
     }
 }
 
-export default connect(mapStateToProps)(ContactData);
+const mapDispatchToProps = dispatch => {
+    return{
+        onOrderSubmitted: (orderDetails) => dispatch(orderActionCreators.orderSubmitted(orderDetails))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios));

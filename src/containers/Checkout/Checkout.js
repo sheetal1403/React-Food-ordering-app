@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 import ContactData from '../Checkout/ContactData/ContactData';
 import Aux from '../../hoc/Auxillary/Auxillary';
-import { Route } from 'react-router';
+import { Route, Redirect } from 'react-router-dom';
 
 class Checkout extends Component{
 
@@ -49,12 +49,18 @@ class Checkout extends Component{
     }
 
     render(){
+
+        let burgerFinal = <Redirect to="/"/>
+        if(this.props.addOns){
+            burgerFinal = <CheckoutSummary 
+            addOns={this.props.addOns}
+            continueCheckout={this.continueCheckoutHandler}
+            cancelCheckout={this.cancelCheckoutHandler}></CheckoutSummary>
+        }
+
         return(
             <Aux>
-                <CheckoutSummary 
-                addOns={this.props.addOns}
-                continueCheckout={this.continueCheckoutHandler}
-                cancelCheckout={this.cancelCheckoutHandler}></CheckoutSummary>
+                {burgerFinal}
                 <Route 
                     path={this.props.match.path + '/contact'} 
                     // render={(props) => (<ContactData addOns={this.props.addOns} price={this.props.price} { ...props }/>)}
