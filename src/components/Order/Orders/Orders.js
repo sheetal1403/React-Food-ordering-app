@@ -17,7 +17,7 @@ class Orders extends Component{
         this.setState({loading: true});
         axios.get('/orders.json')
             .then(response => {
-                // console.log(response.data);
+                console.log(response.data);
                 this.setState({
                     orders: response.data,
                     loading: false
