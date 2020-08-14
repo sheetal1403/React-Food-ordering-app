@@ -26,6 +26,7 @@ class FoodBuilder extends Component{
 
     componentDidMount(){
         this.props.onInitIngredients();
+        console.log(this.props.addOns);
         //DONE IN THE ACTION CREATORS
         // axios.get('/burgerAddOns.json')
         //     .then(response => {
@@ -123,7 +124,7 @@ class FoodBuilder extends Component{
         //     queryParams.push(encodeURIComponent(i)+'='+encodeURIComponent(this.props.burgerAddOns[i]));
         // };
         // queryParams.push("price="+this.props.price);
-
+        console.log('HERE')
         this.props.history.push({
             pathname: '/checkout'
             // search: '?' + queryParams.join('&')
@@ -186,9 +187,9 @@ class FoodBuilder extends Component{
 
 const mapStateToProps = state => {
     return{
-        burgerAddOns : state.burgerAddOns,
-        price: state.price,
-        error: state.error
+        burgerAddOns : state.foodBuilder.burgerAddOns,
+        price: state.foodBuilder.price,
+        error: state.foodBuilder.error
 
     }
     

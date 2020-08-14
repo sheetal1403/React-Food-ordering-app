@@ -33,6 +33,7 @@ export const initIngredients = () => {
     return dispatch => {
         axios.get('/burgerAddOns.json')
         .then(response => {
+            console.log('ADDONS:', response.data);
             dispatch(setIngredients(response.data))
         }).catch(e => {
             dispatch(fetchAddOnsFailed())

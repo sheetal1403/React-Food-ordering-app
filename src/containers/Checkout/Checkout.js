@@ -49,33 +49,32 @@ class Checkout extends Component{
     }
 
     render(){
-
+        console.log(this.props.addOns);
         let burgerFinal = <Redirect to="/"/>
         if(this.props.addOns){
-            burgerFinal = <CheckoutSummary 
-            addOns={this.props.addOns}
-            continueCheckout={this.continueCheckoutHandler}
-            cancelCheckout={this.cancelCheckoutHandler}></CheckoutSummary>
-        }
-
-        return(
+            burgerFinal = 
             <Aux>
-                {burgerFinal}
+                <CheckoutSummary 
+                    addOns={this.props.addOns}
+                    continueCheckout={this.continueCheckoutHandler}
+                    cancelCheckout={this.cancelCheckoutHandler}></CheckoutSummary>
+
                 <Route 
                     path={this.props.match.path + '/contact'} 
                     // render={(props) => (<ContactData addOns={this.props.addOns} price={this.props.price} { ...props }/>)}
-                    component = {ContactData}
-                    />
+                    component = {ContactData}/>
             </Aux>
             
-        );
+        }
+
+        return burgerFinal;
     }
 };
 
 const mapStateToProps = state => {
     return{
-        addOns: state.burgerAddOns,
-        price: state.price
+        addOns: state.foodBuilder.burgerAddOns,
+        price: state.foodBuilder.price
     }
 }
 

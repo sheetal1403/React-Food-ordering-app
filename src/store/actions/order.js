@@ -18,6 +18,7 @@ export const orderFailed = (error) => {
 }
 
 export const orderStart = () => {
+    console.log('order start');
     return{
         type: actionTypes.ORDER_START
     }
