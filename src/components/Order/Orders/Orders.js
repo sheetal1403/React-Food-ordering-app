@@ -9,11 +9,6 @@ import * as actions from '../../../store/actions/index';
 
 class Orders extends Component{
 
-    state = {
-        loading: false,
-        orders: null,
-        error: false
-    }
 
     componentDidMount(){
 
@@ -35,7 +30,7 @@ class Orders extends Component{
 
     render(){
         let orders = this.props.error ? <p style={{textAlign: 'center'}}>Orders could not be loaded</p> : <Spinner/>
-        if(!this.props.loading && this.props.orders !== null){
+        if(this.props.orders.length !== 0){
             orders = Object.keys(this.props.orders).map(orderKey => {
                 return <SingleOrder 
                         key={orderKey} 
