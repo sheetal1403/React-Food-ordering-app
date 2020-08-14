@@ -26,7 +26,6 @@ class FoodBuilder extends Component{
 
     componentDidMount(){
         this.props.onInitIngredients();
-        console.log(this.props.addOns);
         //DONE IN THE ACTION CREATORS
         // axios.get('/burgerAddOns.json')
         //     .then(response => {
@@ -84,6 +83,7 @@ class FoodBuilder extends Component{
 
     purchaseHandler = () => {
         this.setState({orderClicked: true})
+        this.props.onOrderInit();
     }
 
     closeModal = () => {
@@ -124,7 +124,6 @@ class FoodBuilder extends Component{
         //     queryParams.push(encodeURIComponent(i)+'='+encodeURIComponent(this.props.burgerAddOns[i]));
         // };
         // queryParams.push("price="+this.props.price);
-        console.log('HERE')
         this.props.history.push({
             pathname: '/checkout'
             // search: '?' + queryParams.join('&')
@@ -139,8 +138,7 @@ class FoodBuilder extends Component{
 
 
     render(){ 
-        
-
+    
         let burger = this.props.error ? <p style={{textAlign: 'center'}}>Sorry! Loading error</p> : <Spinner/>
         let orderSummary = <Spinner/>
         
@@ -199,7 +197,8 @@ const mapDispatchToProps = dispatch => {
     return{
         onIngredientAdded: (addOnType) => dispatch(foodBuilderActionCreators.addIngredient(addOnType)),
         onIngredientRemoved: (addOnType) => dispatch(foodBuilderActionCreators.removeIngredient(addOnType)),
-        onInitIngredients: () => dispatch(foodBuilderActionCreators.initIngredients())
+        onInitIngredients: () => dispatch(foodBuilderActionCreators.initIngredients()),
+        onOrderInit: () => dispatch(foodBuilderActionCreators.orderInit())
     }
 }
 

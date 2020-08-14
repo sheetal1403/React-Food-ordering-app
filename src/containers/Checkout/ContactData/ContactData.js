@@ -72,13 +72,15 @@ const mapStateToProps = state => {
     return{
         addOns: state.foodBuilder.burgerAddOns,
         price: state.foodBuilder.price,
-        loading: state.order.loading
+        loading: state.order.loading,
+       
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return{
-        onOrderSubmitted: (orderDetails) => dispatch(orderActionCreators.orderSubmitted(orderDetails))
+        onOrderSubmitted: (orderDetails) => dispatch(orderActionCreators.orderSubmitted(orderDetails)),
+        onOrderInit: () => dispatch(orderActionCreators.orderInit())
     }
 }
 

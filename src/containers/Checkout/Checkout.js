@@ -4,6 +4,7 @@ import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSumm
 import ContactData from '../Checkout/ContactData/ContactData';
 import Aux from '../../hoc/Auxillary/Auxillary';
 import { Route, Redirect } from 'react-router-dom';
+import * as orderActionCreators from '../../store/actions/index';
 
 class Checkout extends Component{
 
@@ -17,9 +18,16 @@ class Checkout extends Component{
         price: 0
     }
 
+
     //Here didMount works because addOns is not null. If it is set to null, use willMount or contructor to parse the query params as it will executed before the render method
     // componentDidMount(){  //REDUX takes care of getting the state
     //     this.parseQueryParams();
+    // }
+
+    //WillMount method is too late. render method will be executed with old props
+    // componentWillMount(){
+    //     this.props.onOrderInit()
+    //     console.log(this.props.ordered);
     // }
 
     parseQueryParams = () => {
@@ -49,11 +57,13 @@ class Checkout extends Component{
     }
 
     render(){
-        console.log(this.props.addOns);
-        let burgerFinal = <Redirect to="/"/>
+
+        let burgerFinal = <Redirect to="/"/> 
         if(this.props.addOns){
+            const orderCompleteRedirect = this.props.ordered ? <Redirect to="/"/> : null;
             burgerFinal = 
             <Aux>
+                {orderCompleteRedirect}
                 <CheckoutSummary 
                     addOns={this.props.addOns}
                     continueCheckout={this.continueCheckoutHandler}
@@ -74,8 +84,15 @@ class Checkout extends Component{
 const mapStateToProps = state => {
     return{
         addOns: state.foodBuilder.burgerAddOns,
-        price: state.foodBuilder.price
+        price: state.foodBuilder.price,
+        ordered: state.order.ordered
     }
 }
 
-export default connect(mapStateToProps)(Checkout);
+const mapDispatchToProps = dispatch => {
+    return{
+        onOrderInit: () => dispatch(orderActionCreators.orderInit())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

@@ -40,7 +40,8 @@ const reducer = (state = initialState, action) => {
             return{
                 ...state,
                 burgerAddOns: action.addOns,
-                error: false
+                error: false,
+                price: initialState.price
             }
         case actionTypes.FETCH_ADDONS_FAILED:
             return{
