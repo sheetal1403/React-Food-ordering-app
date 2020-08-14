@@ -4,4 +4,4 @@ export{
     initIngredients
 } from './foodBuilder';
 
-export {orderSubmitted, orderInit} from './order';
+export {orderSubmitted, orderInit, fetchOrders} from './order';

@@ -45,3 +45,36 @@ export const orderInit = () => {
         type: actionTypes.ORDER_INIT
     }
 }
+
+export const fetchOrdersSuccessful = (orders) => {
+    return{
+        type: actionTypes.FETCH_ORDERS_SUCCESS,
+        orders
+    }
+}
+
+export const fetchOrdersFailed = () => {
+    return{
+        type: actionTypes.FETCH_ORDERS_FAILED
+    }
+}
+
+export const fetchOrdersInit = () => {
+    return{
+        type: actionTypes.FETCH_ORDERS_INIT
+    }
+}
+
+export const fetchOrders = () => {
+    
+    return dispatch => {
+        dispatch(fetchOrdersInit());
+        axios.get('/orders.json')
+            .then(response => {
+                dispatch(fetchOrdersSuccessful(response.data));
+            })
+            .catch(e => {
+                dispatch(fetchOrdersFailed());
+            });
+    }
+}

@@ -31,7 +31,7 @@ export const fetchAddOnsFailed = () => {
 
 export const initIngredients = () => {
     return dispatch => {
-        axios.get('/burgerAddOns.json')
+        axios.get('/burgerAddOns')
         .then(response => {
             dispatch(setIngredients(response.data))
         }).catch(e => {

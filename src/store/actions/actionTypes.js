@@ -7,3 +7,8 @@ export const POST_ORDER = 'POST_ORDER';
 export const ORDER_FAILED = 'ORDER_FAILED';
 export const ORDER_START = 'ORDER_START';
 export const ORDER_INIT = 'ORDER_INIT';
+
+export const FETCH_ORDERS_INIT = 'FETCH_ORDERS_INIT';
+export const FETCH_ORDERS = 'FETCH_ORDERS';
+export const FETCH_ORDERS_SUCCESS = 'FETCH_ORDERS_SUCCESS';
+export const FETCH_ORDERS_FAILED = 'FETCH_ORDERS_FAIL';
