@@ -18,6 +18,7 @@ export const orderFailed = (error) => {
 }
 
 export const orderStart = () => {
+    console.log('order start')
     return{
         type: actionTypes.ORDER_START
     }
@@ -25,7 +26,7 @@ export const orderStart = () => {
 
 export const orderSubmitted = (orderDetails) => {
     return dispatch => {
-        orderStart();
+        dispatch(orderStart());
         axios.post('/orders.json', orderDetails)
             .then(response => {
                 console.log(response.data);
