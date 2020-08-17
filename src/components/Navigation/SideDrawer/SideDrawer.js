@@ -21,7 +21,7 @@ const sideDrawer = (props) => {
                     <span onClick={props.close}><i className="fa fa-times" aria-hidden="true"></i></span>
                 </div>
                 <nav>
-                    <NavigationItems/>
+                    <NavigationItems isAuth={props.isAuth}/>
                 </nav>
             </div>
         </Aux>

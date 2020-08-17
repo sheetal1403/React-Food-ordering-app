@@ -7,5 +7,5 @@ export{
 export {orderSubmitted, orderInit, fetchOrders} from './order';
 
 export {
-    auth
+    auth, authLogout
 } from './auth'

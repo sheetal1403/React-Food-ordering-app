@@ -46,3 +46,9 @@ export const auth = (email, password, signUp) => {
     }
 }
 
+export const authLogout = () => {
+    return{
+        type: actionTypes.AUTH_LOGOUT
+    }
+}
+

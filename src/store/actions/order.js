@@ -64,8 +64,8 @@ export const fetchOrdersInit = () => {
     }
 }
 
-export const fetchOrders = () => {
-    
+export const fetchOrders = (token) => {
+    console.log(token);
     return dispatch => {
         // dispatch(fetchOrdersInit());
         axios.get('/orders.json')
