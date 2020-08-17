@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import AuthInput from '../../components/UI/AuthInput/AuthInput';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import { Redirect } from 'react-router-dom';
 import classes from './Auth.css';
 import * as actions from '../../store/actions/auth';
 
@@ -101,6 +102,10 @@ class Auth extends Component{
 
     render(){
 
+        console.log(this.props.isAuth);
+        let authForm = <Spinner/>
+
+
         let formArray = [];
         for(let key in this.state.controls){
             formArray.push({
@@ -114,7 +119,7 @@ class Auth extends Component{
             errorMessage = <p>{this.props.error}</p>
         }
 
-        let authForm = <Spinner/>
+        
         if(!this.props.loading){
             authForm = (
                 <div className={classes.Form}>
@@ -141,7 +146,9 @@ class Auth extends Component{
             );
         }
 
-        
+        if(this.props.isAuth){
+            authForm = <Redirect to="/"/>
+        }
 
         return authForm
     }
@@ -150,7 +157,8 @@ class Auth extends Component{
 const mapStateToProps = state => {
     return{
         loading: state.auth.loading,
-        error: state.auth.error
+        error: state.auth.error,
+        isAuth : state.auth.token === null ? false : true
     }
 }
 
