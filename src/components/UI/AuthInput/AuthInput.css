@@ -1,0 +1,10 @@
+.AuthInput{
+    padding: 5px;
+    margin: 10px;
+    outline: none;
+}
+
+.Invalid{
+    background-color: lightcoral;
+    color: white;
+}
