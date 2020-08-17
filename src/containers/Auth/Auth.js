@@ -35,7 +35,8 @@ class Auth extends Component{
                 valid: false,
                 touched: false
             }
-        }
+        },
+        formIsValid: false
     }
 
 
@@ -58,7 +59,7 @@ class Auth extends Component{
             isValid = value.length <= rules.maxLength && isValid;
         }
 
-        if(rules.email){
+        if(rules.isEmail){
             const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
             isValid = pattern.test(value) && isValid
         }
@@ -71,10 +72,13 @@ class Auth extends Component{
         const updatedForm = { ...this.state.controls };
         const updatedFormElement = updatedForm[inputIdentifier];
         updatedFormElement.value = event.target.value;
-        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
-        
+        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);  
         updatedFormElement.touched = true;
-        this.setState({controls: updatedForm })
+        let formIsValid = true ;
+        for(let formElement in updatedForm){
+            formIsValid = updatedForm[formElement].valid && formIsValid;
+        }
+        this.setState({controls: updatedForm, formIsValid})
     }
     
 
@@ -102,7 +106,7 @@ class Auth extends Component{
                                 touched = {formElement.config.touched}
                                 key= {formElement.id}/>
                     })}
-                    <Button btnType='Success'>Log in</Button>
+                    <Button btnType='Success' disabled={!this.state.formIsValid}>Log in</Button>
                 </form>
             </div>
         );
