@@ -34,16 +34,14 @@ export const auth = (email, password, signUp) => {
         if(!signUp){
             url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + API_KEY;
         }
-
-        console.log(url);
         axios.post(url, authData)
         .then(response => {
             console.log(response)
             dispatch(authSuccess(response.data));
         })
         .catch(error => {
-            console.log(error.message);
-            dispatch(authFailed(error));
+            console.log(error.error);
+            dispatch(authFailed(error.message));
         })
     }
 }
