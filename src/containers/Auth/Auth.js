@@ -101,8 +101,6 @@ class Auth extends Component{
 
 
     render(){
-
-        console.log(this.props.isAuth);
         let authForm = <Spinner/>
 
 

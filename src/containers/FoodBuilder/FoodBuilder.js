@@ -82,8 +82,13 @@ class FoodBuilder extends Component{
     // }
 
     purchaseHandler = () => {
-        this.setState({orderClicked: true})
-        this.props.onOrderInit();
+        if(this.props.isAuth){
+            this.setState({orderClicked: true})
+            this.props.onOrderInit();
+        }else{
+            this.props.history.push('/auth');
+        }
+        
     }
 
     closeModal = () => {
@@ -152,7 +157,8 @@ class FoodBuilder extends Component{
                         removeIngredient={this.props.onIngredientRemoved}
                         price={this.props.price}
                         canBeBought={this.updateCanBeBought(this.props.burgerAddOns)}
-                        ordered={this.purchaseHandler}></BuildControls>
+                        ordered={this.purchaseHandler}
+                        isAuth={this.props.isAuth}></BuildControls>
                 </Aux>
             );
             orderSummary = <OrderSummary 
@@ -187,7 +193,8 @@ const mapStateToProps = state => {
     return{
         burgerAddOns : state.foodBuilder.burgerAddOns,
         price: state.foodBuilder.price,
-        error: state.foodBuilder.error
+        error: state.foodBuilder.error,
+        isAuth: state.auth.token === null ? false : true
 
     }
     

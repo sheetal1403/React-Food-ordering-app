@@ -27,7 +27,9 @@ export const auth = (email, password, signUp) => {
         dispatch(authStart());
         //ASynchronously authenticate data
         const authData = {
-            email, password
+            email, 
+            password,
+            returnSecureToken: true
         }
 
         var url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + API_KEY;
@@ -36,17 +38,20 @@ export const auth = (email, password, signUp) => {
         }
         axios.post(url, authData)
         .then(response => {
-            console.log(response)
+            const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
+            localStorage.setItem('token', response.data.idToken);
+            localStorage.setItem('expirationDate', expirationDate);
             dispatch(authSuccess(response.data));
         })
         .catch(error => {
-            console.log(error.error);
-            dispatch(authFailed(error.message));
+            dispatch(authFailed(error.response.data.error.message));
         })
     }
 }
 
 export const authLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('expirationDate');
     return{
         type: actionTypes.AUTH_LOGOUT
     }
