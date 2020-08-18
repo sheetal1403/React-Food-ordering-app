@@ -11,8 +11,7 @@ class Orders extends Component{
 
 
     componentDidMount(){
-        this.props.onCheckAuth();
-        console.log('token' + this.props.token);
+        // this.props.onCheckAuth();
         this.props.onFetchOrders(this.props.token, this.props.userId);
         // this.setState({loading: true});
         // axios.get('/orders.json')

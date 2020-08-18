@@ -12,7 +12,6 @@ import * as actions from './store/actions/index';
 class App extends Component{
 
   componentDidMount(){
-    console.log('check if auth');
     this.props.onCheckAuth();
   }
 

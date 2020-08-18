@@ -9,7 +9,6 @@ export const authStart = () => {
 }
 
 export const authSuccess = (authData) => {
-    console.log('authSuccess ' + authData.idToken)
     return{
         type: actionTypes.AUTH_SUCCESS,
         authData
