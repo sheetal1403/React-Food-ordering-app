@@ -27,10 +27,11 @@ class ContactData extends Component{
         const order = {
             ingredients: this.props.addOns,
             totalPrice: this.props.price, //Total price should actually be calculated in server. The customer can modify this data otherwise
-            customerData: this.state.orderForm
+            customerData: this.state.orderForm,
+            userId: this.props.userId
             
         };
-        this.props.onOrderSubmitted(order);
+        this.props.onOrderSubmitted(order, this.props.token);
     
     }
 
@@ -73,13 +74,15 @@ const mapStateToProps = state => {
         addOns: state.foodBuilder.burgerAddOns,
         price: state.foodBuilder.price,
         loading: state.order.loading,
+        token: state.auth.token,
+        userId: state.auth.userId
        
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return{
-        onOrderSubmitted: (orderDetails) => dispatch(orderActionCreators.orderSubmitted(orderDetails)),
+        onOrderSubmitted: (orderDetails, token) => dispatch(orderActionCreators.orderSubmitted(orderDetails, token)),
         onOrderInit: () => dispatch(orderActionCreators.orderInit())
     }
 }

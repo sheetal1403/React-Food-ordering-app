@@ -23,16 +23,16 @@ export const orderStart = () => {
     }
 }
 
-export const orderSubmitted = (orderDetails) => {
+export const orderSubmitted = (orderDetails, token) => {
     return dispatch => {
         dispatch(orderStart());
-        axios.post('/orders.json', orderDetails)
+        axios.post('/orders.json?auth=' + token, orderDetails)
             .then(response => {
-                console.log(response.data);
                 dispatch(postOrder(response.data.name, orderDetails));
                 })
                 
             .catch(error => {
+                console.log(error);
                 dispatch(orderFailed(error))
             });
     }
@@ -46,9 +46,13 @@ export const orderInit = () => {
 }
 
 export const fetchOrdersSuccessful = (orders) => {
+    const ordersArray = [];
+    for(const key in orders){
+        ordersArray.push(orders[key]);
+    }
     return{
         type: actionTypes.FETCH_ORDERS_SUCCESS,
-        orders
+        ordersArray
     }
 }
 
@@ -64,10 +68,11 @@ export const fetchOrdersInit = () => {
     }
 }
 
-export const fetchOrders = (token) => {
+export const fetchOrders = (token, userId) => {
     return dispatch => {
         // dispatch(fetchOrdersInit());
-        axios.get('/orders.json?auth=' + token)
+        const queryParams = '?auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"';
+        axios.get('/orders.json' + queryParams)
             .then(response => {
                 dispatch(fetchOrdersSuccessful(response.data));
             })
