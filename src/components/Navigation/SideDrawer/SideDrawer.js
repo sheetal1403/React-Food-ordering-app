@@ -15,7 +15,7 @@ const sideDrawer = (props) => {
     return(
         <Aux>
             <Backdrop show={props.showSideDrawer} clicked={props.close}/>
-            <div className={classesList}>
+            <div className={classesList} onClick={props.close}>
                 <div className={classes.Logo}>
                     <Logo/>
                     <span onClick={props.close}><i className="fa fa-times" aria-hidden="true"></i></span>
