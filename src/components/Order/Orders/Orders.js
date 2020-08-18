@@ -11,7 +11,8 @@ class Orders extends Component{
 
 
     componentDidMount(){
-
+        this.props.onCheckAuth();
+        console.log('token' + this.props.token);
         this.props.onFetchOrders(this.props.token);
         // this.setState({loading: true});
         // axios.get('/orders.json')
@@ -58,6 +59,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
+        onCheckAuth: () => dispatch(actions.checkIfAuth()),
         onFetchOrders: (token) => dispatch(actions.fetchOrders(token))
     }
 }

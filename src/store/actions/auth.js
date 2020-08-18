@@ -9,7 +9,7 @@ export const authStart = () => {
 }
 
 export const authSuccess = (authData) => {
-
+    console.log('authSuccess ' + authData.idToken)
     return{
         type: actionTypes.AUTH_SUCCESS,
         authData
@@ -84,7 +84,7 @@ export const checkIfAuth = () => {
                 //dont logout
                 const localId = localStorage.getItem('localId');
                 dispatch(authSuccess({
-                    token,
+                    idToken: token,
                     localId
                 }));
                 const newExpiryTime = (expirationDate.getTime() - new Date().getTime())/1000

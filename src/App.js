@@ -6,27 +6,46 @@ import Checkout from '../src/containers/Checkout/Checkout';
 import Orders from '../src/components/Order/Orders/Orders';
 import Auth from '../src/containers/Auth/Auth';
 import Logout from '../src/containers/Auth/Logout';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import * as actions from './store/actions/index';
 
 class App extends Component{
 
   componentDidMount(){
+    console.log('check if auth');
     this.props.onCheckAuth();
   }
 
   render(){
+
+    let routes = (
+      <Switch>
+        <Route path="/auth" component={Auth}/>
+        <Route path="/" component={FoodBuilder}/>
+        <Redirect to="/"/>
+      </Switch>
+      );
+
+    if(this.props.isAuth){
+      routes = (
+        <Switch>
+          <Route path="/checkout" component={Checkout}/>
+          <Route path="/orders" component={Orders}/>
+          <Route path="/logout" component={Logout}/>
+          <Route path="/" component={FoodBuilder}/>
+          <Redirect to="/"/>
+        </Switch>
+        
+      )
+    }
+
     return (
       <BrowserRouter>
         <div>
           <Layout>
             {/* <FoodBuilder/>
             <Checkout/> */}
-            <Route path="/" exact component={FoodBuilder}/>
-            <Route path="/checkout" component={Checkout}/>
-            <Route path="/orders" component={Orders}/>
-            <Route path="/auth" component={Auth}/>
-            <Route path="/logout" component={Logout}/>
+            {routes}
           </Layout>
         </div>
       </BrowserRouter>
@@ -35,10 +54,16 @@ class App extends Component{
   }  
 }
 
+const mapStateToProps = state => {
+  return{
+    isAuth : state.auth.token !== null
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return{
     onCheckAuth: () => dispatch(actions.checkIfAuth())
   }
 }
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
