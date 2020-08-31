@@ -2,9 +2,20 @@
     padding: 5px;
     margin: 10px;
     outline: none;
+    width: 500px;
+}
+
+.AuthInput:focus{
+    outline: rgb(168, 157, 157) solid 2px;
 }
 
 .Invalid{
     background-color: lightcoral;
     color: white;
+}
+
+@media screen and (max-width: 790px){
+    .AuthInput{
+        width: 60%;
+    }
 }

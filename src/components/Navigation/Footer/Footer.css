@@ -1,0 +1,18 @@
+.Footer{
+    padding: 10px;
+    background-color: #703b09;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Contact{
+    display: flex;
+    
+}
+
+.Contact a{
+    padding: 0 10px;
+    color: white;
+}

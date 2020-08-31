@@ -1,3 +1,11 @@
 .Form{
     text-align: center;
+    border: 1px solid black;
+    width: 70%;
+    margin: auto;
+    margin-top: 200px;
+    padding: 30px 20px 40px 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #dddddd;
 }
+ 

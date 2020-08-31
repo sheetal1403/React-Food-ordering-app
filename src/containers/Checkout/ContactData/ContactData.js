@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Button from '../../../components/UI/Button/Button';
+// import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import classes from './ContactData.css';
 import axios from '../../../axios-orders';
@@ -52,7 +52,8 @@ class ContactData extends Component{
                 <Input inputtype='input' type="text" name="country" placeholder="Enter your country" required onChange={this.inputChangedHandler}/>
                 
                 {/* <input type="text" name="country" placeholder="Enter your country"/> */}
-                <Button btnType="Success">Order</Button>
+                {/* <Button btnType="Success">Order</Button> */}
+                <button className={classes.OrderButton}>Order</button>
             </form>
         );
 
