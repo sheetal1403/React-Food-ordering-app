@@ -7,10 +7,10 @@ const buildSingleControl =(props) => (
         <button
             disabled={props.disabled} 
             className={classes.Less}
-            onClick={() => props.removeIngredient(props.label)}>Less</button>
+            onClick={() => props.removeIngredient(props.label)}> - </button>
         <button 
             className={classes.More}
-            onClick={() => props.addIngredient(props.label)}>More</button>
+            onClick={() => props.addIngredient(props.label)}> + </button>
     </div>
 );
 

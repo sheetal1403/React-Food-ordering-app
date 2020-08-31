@@ -18,7 +18,7 @@ const buildControls = (props) => {
     return (
         
         <div className={classes.BuildControls}>
-            <p>Price : <strong>{props.price}</strong></p>
+            <h3>Price : {props.price} &#8377;</h3>
             {controls}
             <button 
                 className={classes.OrderButton}
