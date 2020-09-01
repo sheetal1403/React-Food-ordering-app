@@ -6,9 +6,11 @@ import Checkout from '../src/containers/Checkout/Checkout';
 // import Orders from '../src/components/Order/Orders/Orders';
 import Auth from '../src/containers/Auth/Auth';
 import Logout from '../src/containers/Auth/Logout';
+import Home from '../src/components/Home/Home';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import * as actions from './store/actions/index';
 import asyncComponent from './hoc/asyncComponent/asyncComponent';
+
 
 const AsyncOrders = asyncComponent(() => {
   return import('../src/components/Order/Orders/Orders');
@@ -25,7 +27,8 @@ class App extends Component{
     let routes = (
       <Switch>
         <Route path="/auth" component={Auth}/>
-        <Route path="/" component={FoodBuilder}/>
+        <Route path="/burger" component={FoodBuilder}/>
+        <Route path="/" component={Home}/>
         <Redirect to="/"/>
       </Switch>
       );
@@ -36,7 +39,8 @@ class App extends Component{
           <Route path="/checkout" component={Checkout}/>
           <Route path="/orders" component={AsyncOrders}/>
           <Route path="/logout" component={Logout}/>
-          <Route path="/" component={FoodBuilder}/>
+          <Route path="/burger" component={FoodBuilder}/>
+          <Route path="/" component={Home}/>
           <Redirect to="/"/>
         </Switch>
         
