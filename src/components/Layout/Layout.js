@@ -3,7 +3,7 @@ import Aux from '../../hoc/Auxillary/Auxillary';
 import classes from './Layout.css';
 import Toolbar from '../Navigation/Toolbar/Toolbar';
 import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
-import Footer from '../Navigation/Footer/Footer';
+
 import { connect } from 'react-redux';
 
 
@@ -25,7 +25,7 @@ class Layout extends Component  {
  
     render(){
 
-        let footer = this.props.isAuthenticated && <Footer></Footer>
+        
 
         return (
             <Aux>
@@ -39,7 +39,7 @@ class Layout extends Component  {
                 <main  className = {classes.Content}>
                     {this.props.children}
                 </main>
-                {footer}
+               
             </Aux>
         )
     }
